@@ -1,0 +1,25 @@
+.main{
+margin-left: 5px;
+  
+}
+   
+input{
+    margin-bottom: 25px;
+   
+}
+textarea{
+    height: 75px;
+ 
+}
+button{
+  padding: 5px 20px;
+    text-align: center;
+    margin-right: 90px;
+}
+sup{
+    height: 200px;
+    color: red;
+}
+form{
+    background-color: rgba(177, 234, 234, 0.073);
+}
