@@ -1,8 +1,9 @@
 import { FaLinkedin } from "react-icons/fa6";
-import './footer.css'
+import styled from "styled-components";
 function Footer() {
     
     return(
+      <Wrapper>
         <div className="footer">
      <div className="information">
         <div>
@@ -25,6 +26,49 @@ function Footer() {
        <div className="disclaimer">
        <h4>Disclaimer</h4 ><span className="value">My this project is dummy, only for shows my skills</span></div>
     </div>
+    </Wrapper>
  )
 }
 export default Footer
+
+
+const Wrapper= styled.section`
+  .footer{
+    background-color: rgb(194, 209, 212);
+    
+}
+.information{
+    display: grid;
+    gap: 10px;
+    grid-template-columns:repeat(2,2fr);
+}
+h4{
+    display: inline;
+}
+.value{
+    margin-left: 25px;
+}
+.disclaimer{
+    text-align: center;
+    background-color: brown;
+}
+.log{
+    margin-left:  20px;
+    text-align: center;
+}
+.pasError{
+    color: green;
+    margin-bottom: 0px !important;
+}
+.pass{
+    margin-bottom: 0px;
+}
+@media only screen and (max-width: 768px) {
+    .information{
+        grid-template-columns:repeat(1,2fr); 
+    }
+} 
+
+
+
+`

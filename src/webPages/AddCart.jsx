@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import './cart.css'
-
+import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
+import styled from 'styled-components';
 import { useCart } from '../context/Cartcontext';
-import Amount from './Amount';
+
 
 function AddCart({details}) {
  const {id,price}=details
@@ -26,14 +26,33 @@ function AddCart({details}) {
         }
    
   return (
+    <Wrapper>
     <div className='cart-design' >
+    <div>
+      <FiMinusCircle onClick={decreaseFunction}/>
+    {amount}
+    
+    <FiPlusCircle onClick={increaseFunction} />
+    </div>
    
-    <Amount amount = {amount} decrease={decreaseFunction} increase={increaseFunction}/>
-    <div></div>
+    
+   
   
     <button onClick={()=>displaycart(id,amount,price,details)} className='add-cart'>Add to Cart
     </button></div>
+    </Wrapper>
   )
 }
 
 export default AddCart
+
+
+const Wrapper=styled.section`
+  .cart-design{
+    display: grid;
+    
+   background-color: blueviolet;
+    grid-template-columns:repeat(2,2fr);
+}
+
+`

@@ -1,14 +1,15 @@
-import "./home.css";
 import { NavLink } from "react-router";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { BsCashCoin } from "react-icons/bs";
 import { FaTruckFast } from "react-icons/fa6";
-import { FiRefreshCw } from "react-icons/fi"
+import { FiRefreshCw } from "react-icons/fi";
+import styled from "styled-components";
 
 function Home() {
   
   return (
-    <div className="main">
+    <Wrapper>
+    
       <div className="first-row">
         <div>
          
@@ -53,7 +54,60 @@ function Home() {
         </div>
 
       </div>
-    </div>
+    
+    </Wrapper>
   );
 }
 export default Home;
+
+
+
+const Wrapper= styled.section`
+  
+    text-align: center;
+
+.hero-pic{
+    height: 100%;
+    width:100%;
+    float: right;
+
+}
+.first-row{
+    display: grid;
+    gap: 10px;
+    grid-template-columns:repeat(2,2fr);
+    background-color: aqua;
+ text-align: center;
+ margin:0 15%;
+}
+.first-row p{
+    text-align: left;
+    margin-left: 10px;
+}
+.services{
+    display: grid;
+    gap: 10px;
+    grid-template-columns:repeat(2,10fr);
+  
+    margin:0 15%;
+    border: 1px;  
+}
+.services  div{
+    border: 1px solid rgb(177, 178, 218);
+    margin: 10px ;
+}
+.icons{
+    justify-content: end;
+    width: 50px;
+    height: 50px;
+}
+@media only screen and (max-width: 768px) {
+    .first-row,.services{
+        grid-template-columns: repeat(1,5fr);
+    }
+    
+}
+a {
+  text-decoration: none;
+}
+`

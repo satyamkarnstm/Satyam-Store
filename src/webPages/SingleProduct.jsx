@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useProduct } from "../context/Context";
-import "./singleProduct.css";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import Rating from "./Rating";
 import { NavLink } from "react-router";
 import { FaArrowLeft } from "react-icons/fa";
 import AddCart from "./AddCart";
+import styled from "styled-components";
 
 
 function SingleProduct() {
@@ -26,7 +26,7 @@ function SingleProduct() {
     return <p>...loading</p>;
   }
   return (
-    <div><div> <NavLink to="/products" end>
+    <Wrapper><div> <NavLink to="/products" end>
     <FaArrowLeft className="arrow"/>
  </NavLink></div>
       <img src={image} alt="pic is loading" className="singimg" />
@@ -35,13 +35,15 @@ function SingleProduct() {
       <p>{description}</p>
       <h3>Category : {category} </h3>
 
-      {rating && (
+      {rating && (<div>
         <div className="star-rate">
         
           <h4 className="singrate">Rating: </h4>
           <Rating stars={rating.rate} review={rating.count} />
-          <span>({rating.count} costumer reviews )</span>
-        </div>
+          </div>
+          <div>
+          <span className="abc">({rating.count} costumer reviews )</span>
+        </div></div>
       )}
 
       <div className="star-rate">
@@ -57,7 +59,50 @@ function SingleProduct() {
     <AddCart details= {singleProducts}>hello</AddCart>
  
   </div>
-    </div>
+    </Wrapper>
   );
 }
 export default SingleProduct;
+
+
+
+const Wrapper = styled.section`
+  .singimg{
+    height: 500px;
+    padding-top: 5px;
+    width: 200px;
+    
+}
+.star-rate{
+    display: flex;
+    margin-right: 5px;
+}
+.singrate{
+    margin: 0;
+    padding-right: 10px;
+}
+.singprice-box{
+
+padding: 1px;
+width: 80px;
+
+margin-left: 5px;
+
+}
+.singsign{
+    margin-top: 25px;
+    height: 12px;
+}
+.arrow{
+    height: 50px;
+    margin: 10px;
+}
+h4{
+  display: inline;
+}
+.abc{
+  display: inline;
+}
+
+
+`

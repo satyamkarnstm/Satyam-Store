@@ -1,6 +1,6 @@
 import { useState } from "react"
-import './footer.css'
 import { useNavigate } from "react-router"
+import styled from "styled-components"
 
 
 function Login() {
@@ -74,6 +74,7 @@ else  if (!a.match(upperCase)) {
       
 
     return(
+        <Wrapper>
         <div className="log">
        {
         form?
@@ -120,6 +121,39 @@ else  if (!a.match(upperCase)) {
 </form>
  }
  </div>
+ </Wrapper>
     )
 }
 export default Login
+
+
+
+const Wrapper= styled.section`
+text-align: center;
+  .main{
+margin-left: 5px;
+  
+}
+   
+input{
+    margin-bottom: 25px;
+   
+}
+textarea{
+    height: 75px;
+ 
+}
+button{
+  padding: 5px 20px;
+    text-align: center;
+    margin-right: 90px;
+}
+sup{
+    height: 200px;
+    color: red;
+}
+form{
+    background-color: rgba(177, 234, 234, 0.073);
+}  
+
+`
