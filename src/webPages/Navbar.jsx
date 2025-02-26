@@ -1,15 +1,28 @@
-//import "./navbar.css";
 import { NavLink } from "react-router";
 import { FaShoppingCart } from "react-icons/fa";
 import { CiMenuBurger } from "react-icons/ci";
-import {useState } from "react";
-import { useCart } from "../context/Cartcontext";
+import {useState, useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import {totalitems} from "../store/slices/cartSlice"
 
 
 function Navbar() {
    const [menu, setMenu]=useState(false)
-   const { totalitem}=useCart()
+    const dispatch = useDispatch()
+useEffect(() => {
+  dispatch(totalitems())
+}, [dispatch])
+
+ 
+const items= useSelector((state)=>{
+ return state.carts.totalitem
+ 
+ })
+ 
+ localStorage.setItem('items',JSON.stringify(items))
+
+
    const mobileMenu=()=>{
       setMenu(!menu)
    }
@@ -41,7 +54,7 @@ function Navbar() {
             <li onClick={mobileMenu}>
             <NavLink to="/cart" end>
                <FaShoppingCart />
-               <sub id="cartNumber">{totalitem}</sub>
+               <sub id="cartNumber">{items}</sub>
             </NavLink>
             </li>
            
@@ -63,6 +76,8 @@ export default Navbar;
 const Wrapper= styled.section`
  position: sticky;
  top: 0;
+ margin-top: 0%;
+ 
    li {
   color: #e72727;
 
@@ -87,7 +102,7 @@ const Wrapper= styled.section`
 }
 .header {
   background-color: antiquewhite;
-  margin-top: 0%;
+
  
   width: 100%;
   height: 50px;

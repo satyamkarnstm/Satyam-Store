@@ -1,23 +1,45 @@
 import ProductList from "./ProductList"
-import { useProduct } from "../context/Context"
+
 import { useEffect, useState } from "react"
 
 import { VscFilterFilled } from "react-icons/vsc"
 import styled from "styled-components"
+import { useDispatch, useSelector } from "react-redux"
+import { getData } from "../store/slices/DataSlice"
+
+
 
 function Products() {
-    const {isloding, product}= useProduct()
-   const[filter,setFilter]=useState(product)
-   const [filterviews,setFilterview]=useState()
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getData())
+  },[dispatch])
   
-   useEffect(()=>{
-    setFilter(product)
-   },[product])
-   if (isloding) {
-    return   <p> ....loading</p>
  
-   
+    
+   const data= useSelector((state)=>{
+    
+         return state.data
+    })
+  
+
+   const[filter,setFilter]=useState(data.product)
+   const [filterviews,setFilterview]=useState()
+   useEffect(()=>{
+    setFilter(data.product)
+      },[data.product])
+  
+      
+    
+
+
+  
+const alldata = ()=>{
+setFilter(data.product)
 }
+
+   
+  
 const filterHandler=()=>{
   setFilterview(!filterviews)
 }
@@ -25,23 +47,29 @@ const filterHandler=()=>{
 
 const categoryFilter=(item)=>{
    
-    const d= product.filter((c)=>{
+    const d= data.product.filter((c)=>{
      return   c.category===item
 
     })
      setFilter(d)
    
     }
-    const allProduct=()=>{
-      setFilter(product)
-      }
+    if (data.loading) {
+      return <h2 style={{textAlign:"center",}}>loading...</h2>
+      
+    }
+    if (data.error!=null) {
+      return <h2  style={{textAlign:"center",}}>{data.error}</h2>
+      
+    }
    
+    
   
    return(<Wrapper>
       <div className="filter">
       <VscFilterFilled onClick={filterHandler} className="filter-sign"/>
       <ul type='none' className={filterviews? 'mobile-filter':'filter-ul'}>
-        <li onClick={allProduct}>all</li>
+        <li onClick={alldata}>all</li>
        
         <li onClick={()=>categoryFilter("men's clothing")}>men's clothing</li>
         <li onClick={()=>categoryFilter("jewelery")}>jewelery</li>
@@ -49,9 +77,10 @@ const categoryFilter=(item)=>{
         <li onClick={()=>categoryFilter("women's clothing")}>women's clothing</li>
         </ul>
         </div>
+       
         <div className="page">
-        {filter.map((d)=>(
-        <ProductList key={d.id}{...d}/>))}
+        {filter.map((data)=>(
+        <ProductList key={data.id}{...data}/>))}
      
     </div>
   

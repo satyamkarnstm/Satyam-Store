@@ -1,3 +1,4 @@
+import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import styled from "styled-components";
 function Footer() {
@@ -16,7 +17,10 @@ function Footer() {
        <div>
         <h2>MY CONTACTS </h2>
        <h4>Email</h4><span className="value">satyamkarnstm@gmail.com</span><br/>
-       <h4>Linkdin </h4><span className="value"><a href="https://www.linkedin.com/in/satyam-kumar-a2375522a" target="blank">  <FaLinkedin/>Satyam Kumar</a><br/></span>
+       <h4>Linkdin </h4><span className="value"><a href="https://www.linkedin.com/in/satyam-kumar-a2375522a" target="blank"> 
+        <FaLinkedin/>Satyam Kumar</a><br/></span>
+       <h4>Github </h4><span className="value"><a href="https://github.com/satyamkarnstm/Satyam-Store.git" target="blank"> 
+        <FaGithub />Satyam Store</a><br/></span>
        
    
       

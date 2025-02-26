@@ -23,7 +23,7 @@ let    a =  (event.target.value)
     var numbers = /[0-9]/g;
     // eslint-disable-next-line 
     var char = /[-._!"`'#%&,:;<>=@{}~\$\(\)\*\+\/\\\?\[\]\^\|]+/;
-     // eslint-disable-next-line 
+   
  if (a.length<3) {
     setPasswordErrors('password must in uppercase, lowercase, number and special charaters')
  } 

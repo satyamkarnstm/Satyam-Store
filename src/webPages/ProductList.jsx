@@ -2,12 +2,13 @@ import { NavLink } from 'react-router';
 //import './product.css'
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import Rating from './Rating';
-import AddCart from './AddCart';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { addCart } from '../store/slices/cartSlice';
 
-function ProductList(d) {
-    
- const {title,price,category,image,rating,id}=d
+function ProductList(data) {
+  const {title,price,category,image,rating,id}=data
+  const dispatch = useDispatch()
     return(
     <Wrapper>
     <div className='box'>
@@ -23,12 +24,14 @@ function ProductList(d) {
         <div className='rating'>
         <span className='color'>Rating</span>
        
-      <div className='rate'>  < Rating stars={rating.rate} review = {rating.count} className="rate"/></div>
+      <div className='rate'>  < Rating stars={rating.rate}  className="rate"/></div>
         </div >
         </div>
         </NavLink>
         <div className='cart'>
-          <AddCart  details= {d}/></div>
+           <button className="add" onClick={()=>dispatch(addCart(data))} >Add to Cart
+              </button>
+          </div>
           </div>
           </Wrapper>
     )
@@ -46,7 +49,7 @@ const Wrapper= styled.section`
   border:1px solid blue ;
  
   margin-bottom: 40px;
-  height: 510px;
+  height: 485px;
   
   
   background-color: rgb(119, 174, 174);
@@ -110,7 +113,10 @@ const Wrapper= styled.section`
 .color{
   color: #000;
 }
-
+.add{
+  width: 100%;
+  background-color: blueviolet;
+}
 
 
 `

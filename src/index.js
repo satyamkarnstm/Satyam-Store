@@ -3,21 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from "react-router";
-import { Aprovder } from './context/Context';
-import { Cartprovider } from './context/Cartcontext';
+import { Provider } from 'react-redux';
+import store from './store/Store';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-     <BrowserRouter>
-    <Aprovder>
-      <Cartprovider>
+    <Provider store={store}>
+   
     <App />
-    </Cartprovider>
-    </Aprovder>
-    </BrowserRouter>
+   
+    </Provider>
    
  
 );

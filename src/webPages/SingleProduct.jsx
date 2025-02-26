@@ -1,35 +1,45 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { useProduct } from "../context/Context";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import Rating from "./Rating";
 import { NavLink } from "react-router";
 import { FaArrowLeft } from "react-icons/fa";
-import AddCart from "./AddCart";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleData } from "../store/slices/SingleDataSlice";
+import { addCart } from "../store/slices/cartSlice";
 
 
 function SingleProduct() {
   const { id } = useParams();
- 
+  const dispatch = useDispatch()
   useEffect(() => {
-    const a = `https://fakestoreapi.com/products/${id}`;
-    fetchSingleData(a);
-    // eslint-disable-next-line
-  }, []);
-  const { isloding, fetchSingleData, singleProducts } = useProduct();
- 
+    dispatch(getSingleData( `https://fakestoreapi.com/products/${id}`))
+   
+  }, [dispatch,id]);
+  const data= useSelector((state)=>{
+   
+       return state.SingleData
+   })
+  const { title, description, image, category, rating, price } = data.singleProducts
 
-  const { title, description, image, category, rating, price } = singleProducts;
-
-  if (isloding) {
-    return <p>...loading</p>;
+  if (data.loading) {
+    return <h2  style={{textAlign:"center",}}>loading...</h2>
+    
   }
+  if (data.error!=null) {
+    return <h2  style={{textAlign:"center",}}>{data.error}</h2>
+    
+  }
+
+ 
   return (
     <Wrapper><div> <NavLink to="/products" end>
     <FaArrowLeft className="arrow"/>
  </NavLink></div>
+  <div className="img-box">
       <img src={image} alt="pic is loading" className="singimg" />
+      </div>
       <h2>{title} </h2>
 
       <p>{description}</p>
@@ -54,11 +64,12 @@ function SingleProduct() {
           <h4>{price}</h4>
         </span>
       </div>
-  <div>
-  
-    <AddCart details= {singleProducts}>hello</AddCart>
  
-  </div>
+     <div className="bp">
+     <button className="addcart" onClick={()=>dispatch(addCart(data.singleProducts))} > ADD TO CART
+                 </button>
+    </div>
+ 
     </Wrapper>
   );
 }
@@ -70,7 +81,8 @@ const Wrapper = styled.section`
   .singimg{
     height: 500px;
     padding-top: 5px;
-    width: 200px;
+    width: 75%;
+   
     
 }
 .star-rate{
@@ -103,6 +115,28 @@ h4{
 .abc{
   display: inline;
 }
+.add{
+   
+    text-align: center;
+   background-color: blueviolet;
+   margin: auto ;
+}
+.addcart{
+ 
+  width: 25%;
+ height: 50px;
+  background-color: #c1acd6;
+  border-radius: 10px;
+  
 
-
+}
+.bp{
+  text-align: center;
+  margin-bottom: 20px;
+}
+.img-box{
+  margin:0 auto;
+ 
+  text-align: center;
+}
 `
